@@ -1,0 +1,59 @@
+{
+  "column_types": {
+    "close": {
+      "exclusive_min": 0.0,
+      "type": "number"
+    },
+    "high": {
+      "exclusive_min": 0.0,
+      "type": "number"
+    },
+    "low": {
+      "exclusive_min": 0.0,
+      "type": "number"
+    },
+    "open": {
+      "exclusive_min": 0.0,
+      "type": "number"
+    },
+    "symbol": {
+      "max_length": 32,
+      "min_length": 1,
+      "pattern": "^[A-Z0-9._/-]+$",
+      "type": "string"
+    },
+    "timestamp_utc": {
+      "min": 1,
+      "type": "integer"
+    },
+    "volume": {
+      "min": 0.0,
+      "type": "number"
+    }
+  },
+  "constraints": {
+    "empty_records_policy": "FAIL_CLOSED_RAISE",
+    "max_gap_seconds": 3600,
+    "nan_inf_policy": "FAIL_CLOSED_RAISE",
+    "ohlc_rules": [
+      "high >= max(open, close)",
+      "low <= min(open, close)",
+      "high >= low",
+      "volume >= 0.0"
+    ],
+    "reject_duplicate_keys": true,
+    "require_monotonic_timestamps": true
+  },
+  "contract_id": "financial_ohlcv_contract_v1",
+  "required_columns": [
+    "timestamp_utc",
+    "symbol",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume"
+  ],
+  "schema_version": "1.0.0",
+  "vertical": "b2b_financial_ohlcv_pipeline"
+}
